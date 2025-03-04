@@ -82,5 +82,4 @@ curl -X POST http://localhost:3000/summarize \
 
 ## Video Demo
 
->>>>>>> b4c5c3b4dc20e2b373c5f7cb747e390fdb058d0a
 [https://github.com/BeniNobel/SummarizeIt/demo.mp4](https://github.com/user-attachments/assets/93c1fca3-4265-4a5c-ae02-b5efe69c6524)

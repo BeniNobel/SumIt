@@ -16,7 +16,7 @@ SumIt is a minimal AI-powered web application that turns articles, essays, and o
 
 ## Demo
 
-[Watch the SumIt demo](YOUR_DEMO_LINK_HERE)
+[Watch the SumIt demo](https://github.com/user-attachments/assets/667f397c-777d-4483-8bb2-2c53d87dfa3a)
 
 ## Features
 

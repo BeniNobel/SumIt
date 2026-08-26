@@ -1,33 +1,38 @@
 import axios from 'axios';
 
-// This is the function where the call to the API is made. Returns the summarized text as a string.
+export const MIN_TEXT_LENGTH = 200;
+export const MAX_TEXT_LENGTH = 3000;
+
 async function summarize(text) {
-    let data = JSON.stringify({
-        "inputs": text,
-        "parameters": {
-          "max_length": 100,
-          "min_length": 30
+    if (typeof text !== 'string' || text.trim().length < MIN_TEXT_LENGTH || text.length > MAX_TEXT_LENGTH) {
+        throw new Error(`Text must be between ${MIN_TEXT_LENGTH} and ${MAX_TEXT_LENGTH} characters.`);
+    }
+
+    const data = JSON.stringify({
+        inputs: text,
+        parameters: {
+            max_length: 100,
+            min_length: 30
         }
     });
 
-    let config = {
+    const config = {
         method: 'post',
-        url: 'https://api-inference.huggingface.co/models/facebook/bart-large-cnn',
+        url: 'https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
         },
-        data: data
-      };
+        data
+    };
 
     try {
         const response = await axios.request(config);
         return response.data[0].summary_text;
-    } catch (err) {
-        console.log(err);
-        throw new Error('An error occurred while summarizing the text.');
+    } catch (error) {
+        console.error(error.response?.data || error.message);
+        throw new Error('The summarization service could not process this text.');
     }
 }
 
-// Export the summarize function
 export default summarize;

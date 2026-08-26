@@ -1,85 +1,122 @@
-# SummarizeIt
+# SumIt — AI Document Summarizer
 
-SummarizeIt is a web application that leverages AI technology to summarize long texts. Using the Hugging Face BART model, SummarizeIt provides an efficient way to condense large articles, research papers, or other lengthy documents into a concise summary. This is ideal for users who are short on time but need to quickly understand key points from a piece of text.
+SumIt is a minimal AI-powered web application that turns articles, essays, and other text into concise summaries using the Hugging Face BART model.
 
 ## Table of Contents
 
+- [Demo](#demo)
 - [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [API Endpoint](#api-endpoint)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Run](#run)
 - [Usage](#usage)
-- [Video Demo](#video-demo)
+- [API Endpoint](#api-endpoint)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+
+## Demo
+
+[Watch the SumIt demo](YOUR_DEMO_LINK_HERE)
 
 ## Features
 
-- **Text Summarization**: Paste any text (min 200 characters, max 100,000 characters) into the input area, and get a concise summary of the key points.
-- **Responsive Design**: The app adapts to different screen sizes, ensuring an optimal user experience on both desktop and mobile devices.
-- **Error Handling**: The app gracefully handles errors such as invalid text input or issues with the summarization API.
+- Single-request text summarization with `facebook/bart-large-cnn`
+- Input validation from 200 to 3,000 characters
+- Live character counting and limit feedback
+- Clear, copy, loading, and error states
+- Minimal monochrome interface
+- Responsive desktop and mobile layouts
+- Express API with server-side validation
+- Automated boundary and request-payload tests
 
-## Technologies Used
+## Requirements
 
-- **Frontend**:
-  - HTML, CSS, JavaScript (ES6)
-  - Fetch API for making HTTP requests
-- **Backend**:
-  - Node.js, Express
-  - Axios for making API calls to Hugging Face
-  - dotenv for environment variable management
-- **API**: Hugging Face BART large CNN model for text summarization
+- Node.js 18 or newer
+- npm
+- A Hugging Face access token with Inference Providers permission
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-Ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [npm](https://www.npmjs.com/)
-
-### Installation
-
-1. Clone this repository:
-
-   ```bash
-   git clone https://github.com/BeniNobel/summarizeit.git
-   cd summarizeit
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-
-3. Create a `.env` file and add your Hugging Face API key:
-   ```bash
-   ACCESS_TOKEN=your_huggingface_api_key
-
-4. Start the server:
-   ```bash
-   npm start
-
-5. Open your browser and navigate to `http://localhost:3000`.
-
-## API Endpoint
-
-- `POST /summarize`: Accepts a `text_to_summarize` parameter in the request body and returns a summarized version of the input text.
-
-### Example Request
+Clone the repository and enter its directory:
 
 ```bash
-curl -X POST http://localhost:3000/summarize \
--H "Content-Type: application/json" \
--d '{"text_to_summarize": "Your long text here."}'
+git clone https://github.com/BeniNobel/SumIt.git
+cd SumIt
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file in the repository root and add your Hugging Face access token:
+
+```env
+ACCESS_TOKEN=your_hugging_face_access_token
+```
+
+The `.env` file is ignored by Git and should never be committed.
+
+## Run
+
+Start the application:
+
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+For development with automatic server restarts:
+
+```bash
+npm run dev
 ```
 
 ## Usage
 
-1. Paste your text into the provided text area (min 200 characters, max 100,000 characters).
-2. Click "Summarize" to get a concise summary.
-3. The summarized text will appear in the output box.
+1. Paste between 200 and 3,000 characters into the document field.
+2. Select **Summarize**.
+3. Review or copy the generated summary.
 
-## Video Demo
+SumIt intentionally uses one inference request per summary. The 3,000-character cap keeps natural-language input within a practical range for BART's context window without adding document chunking logic.
 
-[https://github.com/BeniNobel/SummarizeIt/demo.mp4](https://github.com/user-attachments/assets/93c1fca3-4265-4a5c-ae02-b5efe69c6524)
+## API Endpoint
+
+### `POST /summarize`
+
+Accepts a JSON object containing `text_to_summarize` and returns the generated summary as plain text.
+
+```bash
+curl -X POST http://localhost:3000/summarize \
+  -H "Content-Type: application/json" \
+  -d '{"text_to_summarize":"Artificial intelligence can help people review large amounts of information quickly. Responsible tools support human judgment, reduce repetitive work, and make complex ideas easier to understand without replacing human oversight or careful review."}'
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+npm test
+```
+
+The tests cover supported input boundaries and the Hugging Face request configuration without making external API calls.
+
+## Project Structure
+
+```text
+SumIt/
+├── public/
+│   ├── index.html       # Application interface
+│   ├── script.js        # Client-side interactions and API request
+│   └── styles.css       # Minimal responsive styling
+├── src/
+│   ├── index.js         # Express server and API route
+│   └── summarize.js     # Hugging Face summarization request
+├── test/
+│   └── summarize.test.js
+├── package.json
+└── README.md
+```

@@ -1,13 +1,13 @@
 {
-  "name": "summarizeit",
+  "name": "sumit",
   "version": "1.0.0",
-  "description": "",
+  "description": "SumIt — AI Document Summarizer",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test"
   },
   "author": "BeniNobel",
   "license": "ISC",

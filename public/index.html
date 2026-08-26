@@ -3,38 +3,78 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SummarizeIt</title>
+    <meta name="description" content="Turn long documents into clear, concise summaries with SumIt.">
+    <meta name="theme-color" content="#ffffff">
+    <title>SumIt — AI Document Summarizer</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>SummarizeIt</h1>
-    
-    <p>Welcome to SummarizeIt!</p>
-    
-    <p>Our app uses cutting-edge AI to help you quickly summarize long texts.</p>
-    
-    <p>Whether it's a lengthy article, a research paper, or any other document, SummarizeIt makes it easy to get the key points in no time.</p>
-    
-    <p>Perfect for when you're short on time but need to stay informed.</p>
-    
-    <p>Click the "Summarize" button to get a quick summary.</p>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="wordmark" href="/" aria-label="SumIt home">SumIt</a>
+        <span class="nav-label">AI Document Summarizer</span>
+      </nav>
+    </header>
 
-    <br>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Summarize with AI</p>
+        <h1 id="hero-title">Long documents.<br><span>Short version.</span></h1>
+        <p class="hero-copy">Paste an article, paper, or report. SumIt finds the key ideas and gives you a clear summary in seconds.</p>
+      </section>
 
-    <div class="container">
-      <div class="text-box">
-        <textarea id="text_to_summarize" name="text_to_summarize" placeholder="Paste in some text to summarize. (Min length is 200 chars. Max length is 100,000 chars.)" maxlength="100000"></textarea>
-        <button id="submit-button" class="submit-button">
-          <span class="submit-button-text">Summarize</span>
-        </button>
-      </div>
+      <section class="workspace" aria-label="Document summarizer">
+        <div class="workspace-bar">
+          <div class="ready-state">
+            <span class="ready-dot" aria-hidden="true"></span>
+            <span id="status-text" role="status" aria-live="polite">Ready when you are</span>
+          </div>
+          <span class="range-label">200–3,000 characters</span>
+        </div>
 
-      <div class="text-box"> 
-        <textarea id="summary" name="summarized_text" placeholder="Summarized text will appear here"></textarea>
-      </div>
-    </div>
-    
+        <div class="editor-grid">
+          <section class="editor-pane input-pane" aria-labelledby="input-label">
+            <div class="pane-header">
+              <label id="input-label" for="text_to_summarize">Your document</label>
+              <span id="character-count">0 characters</span>
+            </div>
+            <textarea
+              id="text_to_summarize"
+              name="text_to_summarize"
+              placeholder="Paste your document here…"
+              minlength="200"
+            ></textarea>
+            <div class="pane-actions">
+              <button id="clear-button" class="text-button" type="button" disabled>Clear</button>
+              <button id="submit-button" class="submit-button" type="button" disabled>
+                <span class="submit-button-text">Summarize</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="editor-pane output-pane" aria-labelledby="output-label">
+            <div class="pane-header">
+              <label id="output-label" for="summary">Your summary</label>
+              <button id="copy-button" class="text-button copy-button" type="button" disabled>Copy</button>
+            </div>
+            <textarea
+              id="summary"
+              name="summarized_text"
+              placeholder="Your summary will appear here."
+              readonly
+            ></textarea>
+          </section>
+        </div>
+      </section>
+
+      <p class="privacy-note">Your text is used only to generate your summary.</p>
+    </main>
+
+    <footer class="site-footer">
+      <span>SumIt</span>
+      <span>Read less. Know more.</span>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>

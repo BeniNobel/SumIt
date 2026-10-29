@@ -8,7 +8,7 @@
     <title>SumIt — AI Document Summarizer</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body data-demo-mode="true">
     <header class="site-header">
       <nav class="nav" aria-label="Main navigation">
         <a class="wordmark" href="/" aria-label="SumIt home">SumIt</a>
@@ -18,9 +18,21 @@
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">Summarize with AI</p>
+        <div class="eyebrow-row">
+          <p class="eyebrow">Summarize with AI</p>
+          <span class="demo-badge" data-demo-only>Demo mode</span>
+        </div>
         <h1 id="hero-title">Long documents.<br><span>Short version.</span></h1>
-        <p class="hero-copy">Paste an article, paper, or report. SumIt finds the key ideas and gives you a clear summary in seconds.</p>
+        <p class="hero-copy">Choose an example to preview how SumIt turns a longer document into a clear, concise summary.</p>
+      </section>
+
+      <section class="demo-examples" aria-labelledby="demo-examples-label" data-demo-only>
+        <span id="demo-examples-label">Try an example</span>
+        <div class="example-list">
+          <button class="example-button is-selected" type="button" data-example="ai" aria-pressed="true">Artificial intelligence</button>
+          <button class="example-button" type="button" data-example="climate" aria-pressed="false">Climate research</button>
+          <button class="example-button" type="button" data-example="writing" aria-pressed="false">Creative writing</button>
+        </div>
       </section>
 
       <section class="workspace" aria-label="Document summarizer">
@@ -47,7 +59,7 @@
             <div class="pane-actions">
               <button id="clear-button" class="text-button" type="button" disabled>Clear</button>
               <button id="submit-button" class="submit-button" type="button" disabled>
-                <span class="submit-button-text">Summarize</span>
+                <span class="submit-button-text">Summarize example</span>
               </button>
             </div>
           </section>
@@ -67,7 +79,7 @@
         </div>
       </section>
 
-      <p class="privacy-note">Your text is used only to generate your summary.</p>
+      <p class="privacy-note" data-demo-only>Live inference is disabled in this public demo to manage API usage.</p>
     </main>
 
     <footer class="site-footer">

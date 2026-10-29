@@ -39,17 +39,30 @@ button, textarea { font: inherit; }
   letter-spacing: -.04em;
   text-decoration: none;
 }
-.nav-label, .eyebrow, .workspace-bar, #character-count,
+.nav-label, .eyebrow, .demo-examples, .workspace-bar, #character-count,
 .privacy-note, .site-footer {
   color: var(--muted);
   font-size: 12px;
 }
 .hero { padding: 96px 0 64px; }
+.eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
 .eyebrow {
-  margin: 0 0 18px;
+  margin: 0;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
+}
+.demo-badge {
+  padding: 5px 10px;
+  background: var(--soft);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 600;
 }
 h1 {
   max-width: 850px;
@@ -67,6 +80,28 @@ h1 span { color: #86868b; }
   font-size: clamp(19px, 2.2vw, 23px);
   line-height: 1.4;
 }
+.demo-examples {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.example-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.example-button {
+  padding: 9px 14px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+}
+.example-button.is-selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: white;
+}
+[data-demo-only][hidden] { display: none; }
 .workspace {
   overflow: hidden;
   border: 1px solid var(--line);
@@ -167,6 +202,7 @@ button:focus-visible, a:focus-visible, textarea:focus-visible {
 }
 @media (max-width: 720px) {
   .hero { padding: 70px 0 44px; }
+  .demo-examples { align-items: flex-start; flex-direction: column; gap: 10px; }
   .editor-grid { grid-template-columns: 1fr; }
   .input-pane { border-right: 0; border-bottom: 1px solid var(--line); }
   textarea { height: 240px; }
